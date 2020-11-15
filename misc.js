@@ -33,9 +33,9 @@ function type(value) {
 const runArray = function(data, i) {
     data = data[i];
     if (type(data) == 'arr') {
-        Object.keys(data).forEach(j => {
-            data[j] = runArray(data, j);
-        });
+        for (i of Object.keys(data)) {
+            data[i] = runArray(data, i);
+        }
     }
     return ((!isNaN(Number(data)))) ? newDec(data) : data;
 }
@@ -54,13 +54,6 @@ const toDecimal = function(obj, useCase) {
                     }
                 } else { obj[name] = newDec(obj[name]); }
             }
-            /*Object.keys(obj).forEach(name => {
-                if (type(obj[name]) == 'arr') {
-                    Object.keys(obj[name]).forEach(i => {
-                        obj[name][i] = runArray(obj[name], i);
-                    });
-                } else { obj[name] = newDec(obj[name]); }
-            });*/
             break; 
     }
 }

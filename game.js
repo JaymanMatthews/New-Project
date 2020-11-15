@@ -1,57 +1,59 @@
 class Game {
     constructor() {
-        this.state = this.defaultState();
+        Object.assign(this, this.defaultState());
     }
 
     defaultState() {
         return {
             currencyInfo: ['0', '1'],
             miscInfo: ['0'],
-            upgradeInfo: [
+            upgrades: [
                 ['Upgrade 1', '10', '1.07'],
                 ['Upgrade 2', '20', '1.12'],
                 ['Upgrade 3', '30', '1.15']
-            ]
+            ].map(state => new Upgrade(...state))
         };
     }
 
     save() {
-        localStorage.setItem('savedGame', JSON.stringify(this.state));
+        localStorage.setItem('savedGame', JSON.stringify(this));
     }
 
     load() {
-        const GAME_STATE = JSON.parse(localStorage.getItem('savedGame'));
-        this.state = [GAME_STATE];
-        toDecimal(this.state, 'Array');
-        this.upgrades = upgradeMapping(this.state.upgradeInfo);
+        const SAVED_JSON = localStorage.getItem('savedGame');
+        const SAVED_STATE = JSON.parse(SAVED_JSON, /*new method*/);
+        Object.assign(this, SAVED_STATE);
+
+        //toDecimal(this.state, 'Array');
+        //this.upgrades = upgradeMapping(this.state.upgradeInfo);
         //this.showTab(this.currentTab);
     }
 
     reset() {
         const IS_CONFIRMED = confirm('Would you like to reset your game?');
         if (IS_CONFIRMED) {
-            this.state = this.defaultState();
+            Object.assign(this, this.defaultState());
             this.save();
             location.reload();
         }
     }
 
     set coins(coins) {
-        this.state.currencyInfo[0] = coins;
+        this.currencyInfo[0] = coins;
     }
     get coins() {
-        return this.state.currencyInfo[0];
+        return this.currencyInfo[0];
     }
     set coinsPerSec(cps) {
-        this.state.currencyInfo[1] = cps;
+        this.currencyInfo[1] = cps;
     }
     get coinsPerSec() {
-        return this.state.currencyInfo[1];
+        return this.currencyInfo[1];
     }
     set time(ms) {
-        this.state.miscInfo[0] = ms;
+        this.miscInfo[0] = ms;
     }
     get time() {
-        return this.state.miscInfo[0];
+        return this.miscInfo[0];
     }
 }

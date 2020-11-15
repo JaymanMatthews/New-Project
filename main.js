@@ -9,12 +9,12 @@ const init = function() {
     ELEMENTS[2] = upgradeTitles = document.getElementsByClassName('upgrade-titles');
     ELEMENTS[3] = upgradeCosts = document.getElementsByClassName('upgrade-costs');
     ELEMENTS[4] = upgradeEffects = document.getElementsByClassName('upgrade-effects');
-    Object.keys(game.upgrades).forEach(i => {
-        upgradeButtons[i].onclick = function() { game.upgrades[i].buy(game, coins) };
+    /*Object.keys(game.upgrades).forEach(i => {
+        upgradeButtons[i].onclick = function() { game.upgrades[i].buy(game) };
         upgradeTitles[i].textContent = game.upgrades[i].title;
         upgradeCosts[i].textContent = 'Cost: ' + game.upgrades[i].cost;
         upgradeEffects[i].textContent = 'Effect: ' + game.upgrades[i].multi;
-    });
+    });*/
 
     let currentTime = Date.now();
     setInterval(function() {

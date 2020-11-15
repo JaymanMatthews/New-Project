@@ -1,32 +1,26 @@
 class Upgrade {
-    constructor (state) {
-        this.state = state;
+    constructor (title_or_save, cost, multi) {
+        if (cost != undefined) {
+            this.title = title_or_save;
+            this.cost = cost;
+            this.multi = multi;
+        } else {
+            Object.assign(this, title_or_save);
+        }
     }
 
-    buy(obj, value) {
-        if (obj.value.greaterThanOrEqualTo(this.cost)) {
-            this.changeCost(this.nextCost);
-            obj.value = CALC.sub(obj.value, this.cost);
+    buy(obj) {
+        if (obj.coins.greaterThanOrEqualTo(this.cost)) {
+            obj.coins = CALC.sub(obj.coins, this.cost);
+            this.cost = this.changeCost(this.nextCost);
         }
     }
 
     changeCost(newCost) {
-        this.cost = newCost;
+        return this.cost = newCost;
     }
 
-    get title() {
-        return this.state[0];
-    }
-    set cost(cost) {
-        this.state[1] = cost;
-    }
-    get cost() {
-        return this.state[1];
-    }
     get nextCost() {
         return CALC.mul(this.cost, this.multi);
-    }
-    get multi() {
-        return this.state[2];
     }
 }
