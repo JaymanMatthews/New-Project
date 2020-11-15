@@ -1,6 +1,4 @@
 let game = new Game();
-let tagged_classes = new Map();
-tag_class(Decimal);
 
 const init = function() {
     game.load();

@@ -24,3 +24,5 @@ class Upgrade {
         return CALC.mul(this.cost, this.multi);
     }
 }
+
+register_tag(Upgrade);

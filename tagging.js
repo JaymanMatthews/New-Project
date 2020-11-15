@@ -1,6 +1,10 @@
-const tag_class = function(clazz) {
+let tagged_classes = new Map();
+
+const register_tag = function(clazz) {
     tagged_classes.set(clazz.name, clazz);
 }
+
+register_tag(Decimal);
 
 function tagging(k, v) {
     if (k == 'v' && this.hasOwnProperty('#tag')) {
