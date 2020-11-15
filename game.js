@@ -16,12 +16,12 @@ class Game {
     }
 
     save() {
-        localStorage.setItem('savedGame', JSON.stringify(this));
+        localStorage.setItem('savedGame', JSON.stringify(this, tagging));
     }
 
     load() {
         const SAVED_JSON = localStorage.getItem('savedGame');
-        const SAVED_STATE = JSON.parse(SAVED_JSON, /*new method*/);
+        const SAVED_STATE = JSON.parse(SAVED_JSON, untagging);
         Object.assign(this, SAVED_STATE);
 
         //toDecimal(this.state, 'Array');
