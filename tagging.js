@@ -19,7 +19,7 @@ function tagging(k, v) {
 }
 
 function untagging(_, v) {
-    if (v.hasOwnProperty('#tag')) {
+    if (v?.hasOwnProperty('#tag')) {
         return new (tagged_classes.get(v['#tag']))(v.v);
     } else {
         return v;

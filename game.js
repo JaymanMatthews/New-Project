@@ -5,12 +5,12 @@ class Game {
 
     defaultState() {
         return {
-            currencyInfo: ['0', '1'],
-            miscInfo: ['0'],
+            currencyInfo: [0, 1],
+            miscInfo: [0],
             upgrades: [
-                ['Upgrade 1', '10', '1.07'],
-                ['Upgrade 2', '20', '1.12'],
-                ['Upgrade 3', '30', '1.15']
+                ['Upgrade 1', 10, 1.07],
+                ['Upgrade 2', 20, 1.12],
+                ['Upgrade 3', 30, 1.15]
             ].map(state => new Upgrade(...state))
         };
     }
