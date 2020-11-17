@@ -5,13 +5,13 @@ class Game {
 
     defaultState() {
         return {
-            currencyInfo: [0, 1],
-            miscInfo: [0],
-            upgrades: [
-                ['Upgrade 1', 10, 1.07],
-                ['Upgrade 2', 20, 1.12],
-                ['Upgrade 3', 30, 1.15]
-            ].map(state => new Upgrade(...state))
+            currencyInfo: toDecimal([0, 1]),
+            miscInfo: toDecimal([0]),
+            upgrades: toUpgrade([
+                ['Upgrade 1', 10, 1.07, 'rebuyable'],
+                ['Upgrade 2', 20, undefined, 'one-time'],
+                ['Upgrade 3', 30, undefined, 'one-time']
+            ])
         };
     }
 
@@ -24,7 +24,6 @@ class Game {
         const SAVED_STATE = JSON.parse(SAVED_JSON, untagging);
         Object.assign(this, SAVED_STATE);
 
-        //toDecimal(this.state, 'Array');
         //this.upgrades = upgradeMapping(this.state.upgradeInfo);
         //this.showTab(this.currentTab);
     }
@@ -36,6 +35,10 @@ class Game {
             this.save();
             location.reload();
         }
+    }
+
+    buyUpgrade(num) {
+        return this.upgrades[num].buy(this, toLower(this.upgrades[num].type));
     }
 
     set coins(coins) {

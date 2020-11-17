@@ -13,47 +13,28 @@ const CALC = {
     }
 }
 
-const toLower = function(value) {
-    return value.toLowerCase();
-}
-
 const newDec = function(value) {
     return new Decimal(value);
 }
 
 function type(value) {
-    if (value == null) { return 'nul'; }
-    if (typeof value == 'string') { return 'str'; }
-    if (Array.isArray(value)) { return 'arr'; }
-    if (typeof value == 'object') { return 'obj'; }
-    if (typeof value == 'number') { return 'num'; }
-    if (typeof value == 'boolean') { return 'boo'; }
+    if (value == null) return 'nul';
+    if (typeof value == 'string') return 'str'; 
+    if (Array.isArray(value)) return 'arr';
+    if (typeof value == 'object') return 'obj'; 
+    if (typeof value == 'number') return 'num'; 
+    if (typeof value == 'boolean') return 'boo'; 
+    if (typeof value == undefined) return 'und'; 
 }
 
-const runArray = function(data, i) {
-    data = data[i];
-    if (type(data) == 'arr') {
-        for (i of Object.keys(data)) {
-            data[i] = runArray(data, i);
-        }
-    }
-    return ((!isNaN(Number(data)))) ? newDec(data) : data;
+const toLower = function(v) {
+    return v.toLowerCase();
 }
 
-const upgradeMapping = function(obj) {
-    return obj.map(state => new Upgrade(state));
+const toUpgrade = function(struct) {
+    return struct.map(state => new Upgrade(...state));
 }
 
-const toDecimal = function(obj, useCase) {
-    switch (toLower(useCase)) {
-        case 'array':
-            for (name of Object.keys(obj)) {
-                if (type(obj[name]) == 'arr') {
-                    for (i of Object.keys(obj[name])) {
-                        obj[name][i] = runArray(obj[name], i);
-                    }
-                } else { obj[name] = newDec(obj[name]); }
-            }
-            break; 
-    }
+const toDecimal = function(struct) {
+    return struct.map(newDec);
 }

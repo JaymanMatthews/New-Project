@@ -7,21 +7,10 @@ const register_tag = function(clazz) {
 register_tag(Decimal);
 
 function tagging(k, v) {
-    if (k == 'v' && this.hasOwnProperty('#tag')) {
-        return v;
-    }
     let cName = this[k]?.constructor?.name;
-    if (tagged_classes.has(cName)) {
-        return {'#tag': cName, v};
-    } else {
-        return v;
-    }
+    return !(k == 'v' && this.hasOwnProperty ('#tag')) && tagged_classes.has(cName) ? {'#tag': cName, v} : v;
 }
 
 function untagging(_, v) {
-    if (v?.hasOwnProperty('#tag')) {
-        return new (tagged_classes.get(v['#tag']))(v.v);
-    } else {
-        return v;
-    }
+    return (v?.hasOwnProperty('#tag')) ? new (tagged_classes.get(v['#tag']))(v.v) : v; 
 }
