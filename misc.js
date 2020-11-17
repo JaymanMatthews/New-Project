@@ -17,14 +17,14 @@ const newDec = function(value) {
     return new Decimal(value);
 }
 
-function type(value) {
-    if (value == null) return 'nul';
+const isType = function(value) {
+    if (value === null) return 'nul';
     if (typeof value == 'string') return 'str'; 
     if (Array.isArray(value)) return 'arr';
     if (typeof value == 'object') return 'obj'; 
     if (typeof value == 'number') return 'num'; 
     if (typeof value == 'boolean') return 'boo'; 
-    if (typeof value == undefined) return 'und'; 
+    if (value == undefined) return 'und'; 
 }
 
 const toLower = function(v) {

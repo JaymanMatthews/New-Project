@@ -4,6 +4,7 @@ const UPDATE = {
         while (game.time > MAX_TIME) {
         game.time = CALC.sub(game.time, MAX_TIME);
         game.coins = CALC.add(game.coins, CALC.mul(game.coinsPerSec, (MAX_TIME / SECOND)));
+        upgradeEffects2();
     }
     },
     display: function() {

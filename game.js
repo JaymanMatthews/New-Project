@@ -8,9 +8,9 @@ class Game {
             currencyInfo: toDecimal([0, 1]),
             miscInfo: toDecimal([0]),
             upgrades: toUpgrade([
-                ['Upgrade 1', 10, 1.07, 'rebuyable'],
-                ['Upgrade 2', 20, undefined, 'one-time'],
-                ['Upgrade 3', 30, undefined, 'one-time']
+                ['rebuyable', 'Upgrade 1', 10, undefined, 1.07, 0, undefined],
+                ['one-time', 'Upgrade 2', 20, 1, undefined, undefined, false],
+                ['one-time', 'Upgrade 3', 30, 1, undefined, undefined, false]
             ])
         };
     }

@@ -31,3 +31,7 @@ const init = function() {
 const start = window.onload = function() {
     init();    
 }
+
+const upgradeEffects2 = function() {
+    game.upgrades[0].giveEffect(CALC.add(game.coinsPerSec, 1), game.coinsPerSec); 
+}
